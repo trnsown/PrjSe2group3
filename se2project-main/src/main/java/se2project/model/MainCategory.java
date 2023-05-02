@@ -1,7 +1,8 @@
 package se2project.model;
 
-import javax.persistence.*;
+import lombok.Data;
 
+import javax.persistence.*;
 @Entity
 public class MainCategory {
 

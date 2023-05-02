@@ -32,21 +32,13 @@ public class UserController {
     public String home(Model model) {
 
 
-        List<MainCategory> mainCategoryList = mainCategoryRepository.findAll();
-
-        List<Map<MainCategory, List<SubCategory>>> ListCat = new ArrayList<Map<MainCategory, List<SubCategory>>>();
-        for (MainCategory m:
-                mainCategoryList ) {
-            ListCat.add(new HashMap<MainCategory, List<SubCategory>>(){{
-                put(m,subCategoryRepository.findByMainCategoryEquals(m));
-            }});
-        }
-        model.addAttribute("ListCat", ListCat);
+        List<MainCategory> mainCategories = mainCategoryRepository.findAll();
+        model.addAttribute("ListCat", mainCategories);
         List<Product> products = new ArrayList<>();
-        MainCategory mainCategory = mainCategoryRepository.findMainCategoryByName("laptop");
-        List<SubCategory> subCategoryList = subCategoryRepository.findByMainCategoryEquals(mainCategory);
+        MainCategory mainCategory = mainCategoryRepository.findMainCategoryByName("OTHERS");
+        List<SubCategory> subCategories = subCategoryRepository.findByMainCategoryEquals(mainCategory);
         for (SubCategory subCat:
-                subCategoryList) {
+                subCategories) {
             products.addAll(productRepository.findBySubCategoryEquals(subCat));
         }
         model.addAttribute("products", products);
@@ -65,10 +57,10 @@ public class UserController {
     @GetMapping(value = "/shop")
     public String getCategoryAndProduct(Model model){
         List<Product> products = productRepository.findAll();
-        List<MainCategory> mainCategoryList = mainCategoryRepository.findAll();
+        List<MainCategory> mainCategories = mainCategoryRepository.findAll();
         List<Map<MainCategory, List<SubCategory>>> ListCat = new ArrayList<Map<MainCategory, List<SubCategory>>>();
         for (MainCategory m:
-              mainCategoryList ) {
+                mainCategories ) {
             ListCat.add(new HashMap<MainCategory, List<SubCategory>>(){{
                 put(m,subCategoryRepository.findByMainCategoryEquals(m));
             }});
