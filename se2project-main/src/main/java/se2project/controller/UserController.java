@@ -7,7 +7,6 @@ import se2project.model.SubCategory;
 import se2project.repository.MainCategoryRepository;
 import se2project.repository.ProductRepository;
 import se2project.repository.SubCategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +20,15 @@ import java.util.Map;
 @Controller
 //@RequestMapping(value = "/user")
 public class UserController {
-    @Autowired
     MainCategoryRepository mainCategoryRepository;
-    @Autowired
     SubCategoryRepository subCategoryRepository;
-    @Autowired
     ProductRepository productRepository;
+
+    public UserController(MainCategoryRepository mainCategoryRepository, SubCategoryRepository subCategoryRepository, ProductRepository productRepository) {
+        this.mainCategoryRepository = mainCategoryRepository;
+        this.subCategoryRepository = subCategoryRepository;
+        this.productRepository = productRepository;
+    }
 
     @GetMapping(value = {"/", "/home"})
     public String home(Model model) {

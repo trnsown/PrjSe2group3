@@ -28,13 +28,15 @@ import java.util.Optional;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
-    @Autowired
     private MainCategoryRepository mainCategoryRepository;
-    @Autowired
     private SubCategoryRepository subCategoryRepository;
-    @Autowired
     private ProductRepository productRepository;
 
+    public AdminController(MainCategoryRepository mainCategoryRepository, SubCategoryRepository subCategoryRepository, ProductRepository productRepository) {
+        this.mainCategoryRepository = mainCategoryRepository;
+        this.subCategoryRepository = subCategoryRepository;
+        this.productRepository = productRepository;
+    }
 
     // MAIN CATEGORY
     @GetMapping(value = "")
